@@ -15,6 +15,8 @@ import SupportMenu from "./SupportMenu";
 import { useTracking } from "../util/analytics";
 import DarkModeToggle from "./DarkModeToggle";
 import "./MainLayout.scss";
+import Notification from "../notifications/Notification";
+
 
 type Props = {
   children: React.ReactNode;
@@ -45,6 +47,8 @@ const Menu = ({ children }: MenuProps) => {
   const { trackEvent } = useTracking();
 
   const apolloClient = useApolloClient();
+
+  const handleNotification = () => Notification;
 
   const handleProfileClick = useCallback(() => {
     history.push("/user/profile");
@@ -88,6 +92,7 @@ const Menu = ({ children }: MenuProps) => {
             {children}
           </div>
           <div className="bottom-menu-container">
+            <MenuItem title="test" icon="bell" onClick={handleNotification} />
             <DarkModeToggle />
             <Popover
               className="main-layout__menu__popover"
@@ -105,7 +110,8 @@ const Menu = ({ children }: MenuProps) => {
               title="Profile"
               icon="plus"
               hideTooltip
-              onClick={handleProfileClick}>
+              onClick={handleProfileClick}
+            >
               <UserBadge />
             </MenuItem>
             <MenuItem
